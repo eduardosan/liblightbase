@@ -2,7 +2,6 @@
 # -*- coding: utf-8 -*-
 __author__ = 'eduardo'
 import unittest
-import json
 
 from liblightbase.lbbase.struct import Base, BaseMetadata
 from liblightbase.lbbase.lbstruct.group import *
@@ -75,9 +74,6 @@ class TestJSON(unittest.TestCase):
             file_ext_time=300,
             color='#FFFFFF'
         )
-
-        pass
-
 
     def test_json_fields(self):
         """

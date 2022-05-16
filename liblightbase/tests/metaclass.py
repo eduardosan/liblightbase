@@ -1,4 +1,6 @@
-import liblightbase
+import os.path
+import json
+
 from liblightbase import lbutils
 from liblightbase.lbutils.conv import json2base
 from liblightbase.lbutils.conv import document2json
@@ -7,6 +9,7 @@ from liblightbase.lbutils.conv import json2document
 from liblightbase.lbutils.conv import dict2document
 
 import unittest
+
 
 class LBDocumentTestCase(unittest.TestCase):
     """
@@ -18,132 +21,11 @@ class LBDocumentTestCase(unittest.TestCase):
         Load data from previous tests and setup test data
         :return:
         """
-        #lbjson_test.TestJSON.setUp(self)
+        here = os.path.abspath(os.path.dirname(__file__))
 
-        self.json_base = '''{
-            "metadata":
-                {
-                    "id_base": 5,
-                    "dt_base": "10/05/2014 10:21:49",
-                    "file_ext": false,
-                    "idx_exp": false,
-                    "admin_users": [],
-                    "idx_exp_url": "",
-                    "owner": "",
-                    "idx_exp_time": "0",
-                    "file_ext_time": "0",
-                    "name": "pessoa",
-                    "description": "qqqqqqq",
-                    "password": "qqqqqqqq",
-                    "color": ""
-                },
-            "content": [
-                {
-                    "field": {
-                        "name": "nome",
-                        "alias": "c5",
-                        "description": "efdewf",
-                        "datatype": "Text",
-                        "required": true,
-                        "multivalued": false,
-                        "indices": [
-                            "Textual"
-                        ]
-                    }
-                },
-                {
-                    "field": {
-                        "name": "carros",
-                        "alias": "",
-                        "description": "",
-                        "datatype": "Text",
-                        "required":true,
-                        "multivalued": true,
-                        "indices": [
-                            "Textual"
-                        ]
-                    }
-                },
-                {
-                    "group": {
-                        "metadata": {
-                            "name": "dependente",
-                            "alias": "c3",
-                            "description": "yrjt",
-                            "multivalued": true
-                        },
-                        "content": [
-                            {
-                                "group": {
-                                    "metadata": {
-                                        "name": "gmulti",
-                                        "alias": "c3",
-                                        "description": "yrjt",
-                                        "multivalued": true
-                                    },
-                                    "content": [
-                                        {
-                                            "field": {
-                                                "name": "teste",
-                                                "alias": "c1",
-                                                "description": "gtrgtr",
-                                                "datatype": "Text",
-                                                "required": false,
-                                                "multivalued": false,
-                                                "indices": [
-                                                    "Textual"
-                                                ]
-                                            }
-                                        },
-                                        {
-                                            "field": {
-                                                "name": "teste2",
-                                                "alias": "t2",
-                                                "description": "gtrgtr",
-                                                "datatype": "Text",
-                                                "required": false,
-                                                "multivalued": true,
-                                                "indices": [
-                                                    "Textual"
-                                                ]
-                                            }
-                                        }
-                                    ]
-                                }
-                            },
-                            {
-                                "field": {
-                                    "name": "nome_dep",
-                                    "alias": "c1",
-                                    "description": "gtrgtr",
-                                    "datatype": "Text",
-                                    "required": true,
-                                    "multivalued":false,
-                                    "indices": [
-                                        "Textual"
-                                    ]
-                                }
-                            },
-                            {
-                                "field": {
-                                    "name": "idade_dep",
-                                    "alias": "c2",
-                                    "description": "rgregetg",
-                                    "datatype": "Integer",
-                                    "required": false,
-                                    "multivalued": false,
-                                    "indices": [
-                                        "Textual"
-                                    ]
-                                }
-                            }
-                        ]
-                    }
-                }
-            ]
-        }'''
-
-        self.base = json2base(self.json_base)
+        # Load data
+        with open(os.path.join(here, "./fixtures/pessoa.json"), 'r') as fd:
+            self.base = json2base(json.load(fd))
 
     def test_create_metaclasses(self):
         for struct in self.base.__allstructs__:

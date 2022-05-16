@@ -1,6 +1,9 @@
 #!/usr/env python
 # -*- coding: utf-8 -*-
 __author__ = 'eduardo'
+import json
+import httpretty
+
 from liblightbase.lbbase.struct import Base, BaseMetadata
 from liblightbase.lbbase.lbstruct.group import *
 from liblightbase.lbbase.lbstruct.field import *
@@ -19,6 +22,7 @@ class LBRestTestCase(lbjson_test.TestJSON):
         Load data from previous tests and setup test data
         :return:
         """
+        httpretty.enable()
         lbjson_test.TestJSON.setUp(self)
 
         # Start base definition
@@ -51,7 +55,6 @@ class LBRestTestCase(lbjson_test.TestJSON):
         )
         # End Base definition
 
-        #self.rest_url = "http://localhost/api"
         self.rest_url = "http://127.0.0.1/api"
         self.baserest = lbrest.BaseREST(rest_url=self.rest_url, response_object=True)
         pass
@@ -61,8 +64,14 @@ class LBRestTestCase(lbjson_test.TestJSON):
         Test REST communication
         :return:
         """
+        httpretty.register_uri(
+            httpretty.GET,
+            self.rest_url,
+            content_type="application/json",
+            body=json.dumps({"status": "ok"}),
+            status=200
+        )
         response = self.baserest.search()
-        #response = self.rest.send_request(method='get')
         assert response.status_code == 200
 
     def test_base_creation(self):
@@ -70,6 +79,13 @@ class LBRestTestCase(lbjson_test.TestJSON):
         Test REST base creation
         :return:
         """
+        httpretty.register_uri(
+            httpretty.POST,
+            self.rest_url,
+            content_type="application/json",
+            body=json.dumps({"status": "ok"}),
+            status=200
+        )
         response = self.baserest.create(self.base)
         assert response.status_code == 200
 
@@ -78,6 +94,13 @@ class LBRestTestCase(lbjson_test.TestJSON):
         Rest base removal from REST
         :return:
         """
+        httpretty.register_uri(
+            httpretty.DELETE,
+            self.rest_url + "/base1",
+            content_type="application/json",
+            body=json.dumps({"status": "ok"}),
+            status=200
+        )
         response = self.baserest.delete(self.base)
         assert response.status_code == 200
         pass
@@ -88,5 +111,4 @@ class LBRestTestCase(lbjson_test.TestJSON):
         :return:
         """
         lbjson_test.TestJSON.tearDown(self)
-
-        pass
+        httpretty.reset()

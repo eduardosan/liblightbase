@@ -62,15 +62,15 @@ class pytypes_test(unittest.TestCase):
         self.assertEqual(pytypes.Float(None).value ,None)
         self.assertEqual(pytypes.Float().value ,None)
         
-        self.assertRaises(ValueError,pytypes.Float,1)
-        self.assertRaises(ValueError,pytypes.Float,11111111111111111111)
-        self.assertRaises(ValueError,pytypes.Float,'test')
-        self.assertRaises(ValueError,pytypes.Float,'test')
+        self.assertRaises(ValueError, pytypes.Float, 1)
+        self.assertRaises(ValueError, pytypes.Float, 11111111111111111111)
+        self.assertRaises(ValueError, pytypes.Float, 'test')
+        self.assertRaises(ValueError, pytypes.Float, 'test')
         
     def test_float_set_and_get(self):
         test_float = pytypes.Float()
         test_float.value = 1.1
-        self.assertEqual(test_float.value,1.1)
+        self.assertEqual(test_float.value, 1.1)
 
         with self.assertRaises(ValueError) as cm:
             test_float.value = 1
@@ -102,15 +102,15 @@ class pytypes_test(unittest.TestCase):
         obj = mul()
         obj['text'] = 'my text'
         obj['number'] = 11
-        self.assertEqual(obj.text.value ,'my text')
+        self.assertEqual(obj.text.value,'my text')
         self.assertEqual(obj.number.value , 11)
-        self.assertEqual(obj.value , { 'text': 'my text', 'number': 11 })
-        obj.value = { 'text': 'text 2', 'number': 22 }
-        self.assertEqual(obj.text.value ,'text 2')
+        self.assertEqual(obj.value, { 'text': 'my text', 'number': 11 })
+        obj.value = {'text': 'text 2', 'number': 22 }
+        self.assertEqual(obj.text.value,'text 2')
         self.assertEqual(obj.number.value , 22)
         self.assertEqual(obj.value , { 'text': 'text 2', 'number': 22 })
         with self.assertRaises(AttributeError) as cm:
-            obj.value = { 'otherstuff': 'error' }
+            obj.value = {'otherstuff': 'error' }
     
     def test_class_call_method(self):
         my_date = datetime.now()
@@ -129,31 +129,26 @@ class pytypes_test(unittest.TestCase):
 
     def test_long_init_value(self):
         self.assertEqual(pytypes.Long(11111111111111111111).value,11111111111111111111)
-        self.assertEqual(pytypes.Long(None).value ,None)
-        self.assertEqual(pytypes.Long().value ,None)
+        self.assertEqual(pytypes.Long(None).value, None)
+        self.assertEqual(pytypes.Long().value, None)
 
-        self.assertRaises(ValueError,pytypes.Long,1)
-        self.assertRaises(ValueError,pytypes.Long,1.1)
-        self.assertRaises(ValueError,pytypes.Long,'test')
-        self.assertRaises(ValueError,pytypes.Long,'test')
+        self.assertRaises(ValueError, pytypes.Long, 1.1)
+        self.assertRaises(ValueError, pytypes.Long, 'test')
+        self.assertRaises(ValueError, pytypes.Long, 'test')
 
     def test_long_set_and_get(self):
         test_long = pytypes.Long()
         test_long.value = 11111111111111111111
-        self.assertEqual(test_long.value,11111111111111111111)
+        self.assertEqual(test_long.value, 11111111111111111111)
 
-        with self.assertRaises(ValueError) as cm:
+        with self.assertRaises(ValueError):
             test_long.value = 'test'
 
-        with self.assertRaises(ValueError) as cm:
+        with self.assertRaises(ValueError):
             test_long.value = 'test'
 
-        with self.assertRaises(ValueError) as cm:
+        with self.assertRaises(ValueError):
             test_long.value = 1.1
-
-        with self.assertRaises(ValueError) as cm:
-            test_long.value = 1
-
 
     def tearDown(self):
         pass
