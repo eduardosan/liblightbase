@@ -21,4 +21,8 @@ RUN find . -name '*.py[odc]' -type f -delete
 RUN find . -name '__pycache__' -type d -delete
 RUN rm -rf *.egg-info .cache .eggs build dist dists
 
+
+# Instala testes para rodar dentro do container
+RUN pip install --no-cache-dir -e ".[testing]"
+
 CMD [ "python", "./setup.py" , "develop" ]

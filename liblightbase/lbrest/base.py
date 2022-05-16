@@ -5,6 +5,7 @@ from liblightbase.lbbase.struct import Base
 from liblightbase.lbutils.const import PYSTR
 from liblightbase.lbutils.conv import json2base
 
+
 class BaseREST(LBRest):
 
     """
@@ -21,7 +22,8 @@ class BaseREST(LBRest):
         """
         @param search_obj:
         """
-        return self.send_request(self.httpget,
+        return self.send_request(
+            self.httpget,
             data={self.search_param: search_obj})
 
     # delete path - get(self, base)
@@ -35,7 +37,8 @@ class BaseREST(LBRest):
             msg = 'Base must be Base object or string.'
             assert isinstance(base, PYSTR), msg
             basename = base
-        response = self.send_request(self.httpget,
+        response = self.send_request(
+            self.httpget,
             url_path=[basename])
         return json2base(response)
 

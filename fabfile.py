@@ -309,7 +309,6 @@ def release(branch=None, release_type='patch', verify=False):
     local('echo "%s" > VERSION' % version)
 
     # Update version in files
-    update_docker_compose(version)
     update_sonar_version(version)
 
     # Build

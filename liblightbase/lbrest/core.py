@@ -67,13 +67,15 @@ class LBRest(object):
         globals()['SESSION_COOKIES'] = value
 
     # delete path - send_request(self, method, url_path=[ ], **kwargs)
-    def send_request(self, method, url_path=[ ], **kwargs):
+    def send_request(self, method, url_path=[], **kwargs):
         """
         @param method:
-        @param path:
+        @param url_path:
         Tries to return json response, raise RequestError if exception occurs.
         """
         # First get request method
+        if url_path is None:
+            url_path = []
         request_method = getattr(requests, method.lower())
         # Make http request
         full_url = self.to_url(self.rest_url, *url_path)

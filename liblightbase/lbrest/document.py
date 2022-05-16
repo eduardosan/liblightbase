@@ -8,8 +8,8 @@ from liblightbase.lbsearch.search import Search
 from liblightbase import lbutils
 from liblightbase.lbutils.conv import dict2genericbase
 
-class DocumentREST(LBRest):
 
+class DocumentREST(LBRest):
     """ 
     Contains methods for handling LightBase Files. The communicating is via 
     http to the LighBase REST API.
@@ -61,10 +61,11 @@ class DocumentREST(LBRest):
             assert isinstance(search_obj, Search), msg
         else:
             search_obj = Search()
-        response = self.send_request(self.httpput,
+        response = self.send_request(
+            self.httpput,
             url_path=[self.basename, self.doc_prefix],
             params={self.search_param: search_obj._asjson(),
-            self.path_param: lbutils.object2json(path_list)})
+                    self.path_param: lbutils.object2json(path_list)})
         return response
 
     def get(self, id):
@@ -72,7 +73,8 @@ class DocumentREST(LBRest):
         Retrieves document by id.
         @param id: The document identify.
         """
-        response = self.send_request(self.httpget,
+        response = self.send_request(
+            self.httpget,
             url_path=[self.basename, self.doc_prefix, str(id)])
         return json2document(self.base, response)
 
@@ -81,7 +83,8 @@ class DocumentREST(LBRest):
         Creates new document.
         @param document: Updated Document.
         """
-        response = self.send_request(self.httppost,
+        response = self.send_request(
+            self.httppost,
             url_path=[self.basename, self.doc_prefix],
             data={self.doc_param: document})
         return int(response)

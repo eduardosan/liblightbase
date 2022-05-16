@@ -1,0 +1,144 @@
+{
+    "metadata": {
+        "file_ext": true,
+        "dt_base": "01/12/2014 01:16:16",
+        "idx_exp_time": 300,
+        "idx_exp_url": "http://edusantos.no-ip.biz:9200/lbsociam/crime",
+        "color": "#FFFFFF",
+        "file_ext_time": 300,
+        "idx_exp": true,
+        "id_base": 227,
+        "model": {
+            "tokens": [
+                "Text"
+            ],
+            "default_token": "Text",
+            "date": "DateTime",
+            "description": "Text",
+            "category_pretty_name": "Text",
+            "category_name": "Text",
+            "color": "Text",
+            "total": "Integer",
+            "images": [
+                "File"
+            ]
+        },
+        "description": "Criminal data from social networks",
+        "name": "crime",
+        "password": "123456"
+    },
+    "content": [
+        {
+            "field": {
+                "indices": [
+                    "Ordenado"
+                ],
+                "description": "Total criminal events",
+                "name": "total",
+                "alias": "total",
+                "datatype": "Integer",
+                "required": false,
+                "multivalued": false
+            }
+        },
+        {
+            "field": {
+                "indices": [
+                    "Ordenado",
+                    "Unico"
+                ],
+                "description": "category name",
+                "name": "category_name",
+                "alias": "category_name",
+                "datatype": "Text",
+                "required": true,
+                "multivalued": false
+            }
+        },
+        {
+            "field": {
+                "indices": [
+                    "Ordenado"
+                ],
+                "description": "category pretty name",
+                "name": "category_pretty_name",
+                "alias": "category_pretty_name",
+                "datatype": "Text",
+                "required": true,
+                "multivalued": false
+            }
+        },
+        {
+            "field": {
+                "indices": [],
+                "description": "category description",
+                "name": "description",
+                "alias": "description",
+                "datatype": "Text",
+                "required": false,
+                "multivalued": false
+            }
+        },
+        {
+            "field": {
+                "indices": [
+                    "Ordenado"
+                ],
+                "description": "Identified tokens for this category",
+                "name": "tokens",
+                "alias": "tokens",
+                "datatype": "Text",
+                "required": false,
+                "multivalued": true
+            }
+        },
+        {
+            "field": {
+                "indices": [
+                    "Ordenado"
+                ],
+                "description": "Taxonomy last update",
+                "name": "date",
+                "alias": "date",
+                "datatype": "DateTime",
+                "required": true,
+                "multivalued": false
+            }
+        },
+        {
+            "field": {
+                "indices": [],
+                "description": "Taxonomy related images",
+                "name": "images",
+                "alias": "images",
+                "datatype": "File",
+                "required": false,
+                "multivalued": true
+            }
+        },
+        {
+            "field": {
+                "indices": [
+                    "Ordenado"
+                ],
+                "description": "Default token for this category",
+                "name": "default_token",
+                "alias": "default_token",
+                "datatype": "Text",
+                "required": false,
+                "multivalued": false
+            }
+        },
+        {
+            "field": {
+                "indices": [],
+                "description": "Color to be shown on interface",
+                "name": "color",
+                "alias": "Color",
+                "datatype": "Text",
+                "required": false,
+                "multivalued": false
+            }
+        }
+    ]
+}
